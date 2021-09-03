@@ -9,13 +9,28 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
 @Table(name = "CUSTOMER")
 public class Customer extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(mappedBy = "customer")
     private Cart cart;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Order> orders;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }

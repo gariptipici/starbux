@@ -2,11 +2,21 @@ package com.bestseller.starbux.shop.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Data
 @Table(name = "CART")
-public class Cart extends AbstractOrder{
+public class Cart extends AbstractOrder {
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
 }

@@ -1,9 +1,5 @@
 package com.bestseller.starbux.common.dto;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 
 public abstract class AbstractProductDto extends BaseDto{
