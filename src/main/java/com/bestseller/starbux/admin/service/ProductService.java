@@ -15,6 +15,9 @@ public interface ProductService {
     List<ProductDto> readProducts();
     List<SideProductDto> readSideProducts();
 
+    ProductDto updateProduct(Long productId, ProductDto productDto);
+    SideProductDto updateSideProduct(Long sideProductId, SideProductDto sideProductDto);
+
     void deleteProduct(Long productId);
     void deleteSideProduct(Long sideProductId);
 }

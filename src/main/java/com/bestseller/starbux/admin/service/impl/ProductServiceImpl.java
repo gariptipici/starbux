@@ -9,6 +9,7 @@ import com.bestseller.starbux.admin.service.ProductService;
 import com.bestseller.starbux.common.mapper.ProductMapper;
 import com.bestseller.starbux.common.model.Product;
 import com.bestseller.starbux.common.model.SideProduct;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper = ProductMapper.INSTANCE;
 
-    public ProductServiceImpl(ProductRepository productRepository, SideProductRepository sideProductRepository){
+    public ProductServiceImpl(ProductRepository productRepository, SideProductRepository sideProductRepository) {
         this.productRepository = productRepository;
         this.sideProductRepository = sideProductRepository;
     }
@@ -58,6 +59,31 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<SideProductDto> readSideProducts() {
         return productMapper.sideProductsToSideProductDtos(sideProductRepository.findAll());
+    }
+
+    @Override
+    public ProductDto updateProduct(Long productId, ProductDto productDto) {
+        Product updated = productRepository.findById(productId)
+                .map(existing -> {
+                    Product update = productMapper.productDtoToProduct(productDto);
+                    update.setId(existing.getId());
+                    return update;
+                }).orElseThrow(ProductNotFoundException::new);
+
+        return productMapper.productToProductDto(productRepository.save(updated));
+    }
+
+    @Modifying
+    @Override
+    public SideProductDto updateSideProduct(Long sideProductId, SideProductDto sideProductDto) {
+        SideProduct updated = sideProductRepository.findById(sideProductId)
+                .map(existing -> {
+                    SideProduct update = productMapper.sideProductDtoToSideProduct(sideProductDto);
+                    update.setId(existing.getId());
+                    return update;
+                }).orElseThrow(ProductNotFoundException::new);
+
+        return productMapper.sideProductToSideProductDto(sideProductRepository.save(updated));
     }
 
     @Override
