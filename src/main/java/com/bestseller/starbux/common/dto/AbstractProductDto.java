@@ -2,7 +2,7 @@ package com.bestseller.starbux.common.dto;
 
 import java.math.BigDecimal;
 
-public abstract class AbstractProductDto extends BaseDto{
+public abstract class AbstractProductDto extends BaseDto {
     private String productName;
     private BigDecimal price;
 

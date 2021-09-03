@@ -68,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.sideProductsToSideProductDtos(sideProductRepository.findAll());
     }
 
+    @Modifying
     @Override
     @Transactional
     public ProductDto updateProduct(Long productId, ProductDto productDto) {

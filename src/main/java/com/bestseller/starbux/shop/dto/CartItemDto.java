@@ -1,22 +1,23 @@
 package com.bestseller.starbux.shop.dto;
 
+import com.bestseller.starbux.common.dto.BaseDto;
 import com.bestseller.starbux.common.dto.ProductDto;
 import com.bestseller.starbux.common.dto.SideProductDto;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class CartItemDto {
-    private int quantity;
+public class CartItemDto extends BaseDto {
+    private Integer quantity;
     private BigDecimal price;
     private ProductDto product;
     private List<SideProductDto> sideProducts;
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

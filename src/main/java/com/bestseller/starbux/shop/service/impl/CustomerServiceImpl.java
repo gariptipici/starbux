@@ -5,6 +5,7 @@ import com.bestseller.starbux.shop.exception.CustomerNotfoundException;
 import com.bestseller.starbux.shop.mapper.CustomerMapper;
 import com.bestseller.starbux.shop.model.Cart;
 import com.bestseller.starbux.shop.model.Customer;
+import com.bestseller.starbux.shop.repository.CartItemRepository;
 import com.bestseller.starbux.shop.repository.CartRepository;
 import com.bestseller.starbux.shop.repository.CustomerRepository;
 import com.bestseller.starbux.shop.service.CustomerService;
@@ -18,10 +19,9 @@ import java.math.BigDecimal;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CartRepository cartRepository;
-
     private final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository, CartItemRepository cartItemRepository) {
         this.customerRepository = customerRepository;
         this.cartRepository = cartRepository;
     }
@@ -30,10 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerDto createCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.customerDtoToCustomer(customerDto);
+
         Cart emptyCart = new Cart();
         emptyCart.setAmount(BigDecimal.ZERO);
         Cart cart = cartRepository.save(emptyCart);
         customer.setCart(cart);
+        cart.setCustomer(customer);
         return customerMapper.customerToCustomerDto(customerRepository.save(customer));
     }
 

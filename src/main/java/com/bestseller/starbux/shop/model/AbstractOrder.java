@@ -16,6 +16,16 @@ public abstract class AbstractOrder extends BaseEntity {
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
+    @Column(name = "DISCOUNT")
+    private BigDecimal discount;
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
 
     public List<CartItem> getCartItems() {
         return cartItems;
