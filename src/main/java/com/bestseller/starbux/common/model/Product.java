@@ -5,17 +5,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "PRODUCT")
 public class Product extends AbstractProduct {
 
-
-    @OneToOne
+@Nullable
+    @ManyToOne(fetch = FetchType.LAZY)
     private CartItem cartItem;
 }

@@ -20,13 +20,13 @@ public class CartItem extends BaseEntity {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Cart cart;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<SideProduct> sideProducts;
 
     public int getQuantity() {
