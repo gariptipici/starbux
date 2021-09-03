@@ -88,14 +88,14 @@ alter table product
 alter table side_product
     add constraint FK1e88cmvs6e32c59wakn66htxp foreign key (cart_item_id) references cart_item;
 
-INSERT INTO product
-VALUES (1, 4.00, 'Black Coffee', NULL),
-       (2, 4.00, 'Latte', NULL),
-       (3, 6.00, 'Mocha', NULL),
-       (4, 3.00, 'Tea', NULL);
+insert into product
+values (1, 4.00, 'Black Coffee', null),
+       (2, 4.00, 'Latte', null),
+       (3, 6.00, 'Mocha', null),
+       (4, 3.00, 'Tea', null);
 
-INSERT INTO side_product
-VALUES (1, 2.00, 'Milk', NULL),
-       (2, 3.00, 'Hazelnut syrup', NULL),
-       (3, 5.00, 'Chocolate sauce', NULL),
-       (4, 2.00, 'Lemon', NULL);
+insert into side_product
+values (1, 2.00, 'Milk', null),
+       (2, 3.00, 'Hazelnut syrup', null),
+       (3, 5.00, 'Chocolate sauce', null),
+       (4, 2.00, 'Lemon', null);

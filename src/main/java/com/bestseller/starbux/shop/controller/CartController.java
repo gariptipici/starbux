@@ -24,4 +24,9 @@ public class CartController {
     public CartDto updateCart(@PathVariable Long customerId, @PathVariable Long cartId, @RequestBody CartDto cartDto){
         return cartService.updateCart(customerId, cartId, cartDto);
     }
+
+    @DeleteMapping("/{cartId}")
+    public CartDto deleteCart(@PathVariable Long customerId, @PathVariable Long cartId){
+        return cartService.emptyCart(customerId, cartId);
+    }
 }
