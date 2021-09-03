@@ -3,6 +3,7 @@ package com.bestseller.starbux.shop.model;
 import com.bestseller.starbux.common.model.BaseEntity;
 import com.bestseller.starbux.common.model.Product;
 import com.bestseller.starbux.common.model.SideProduct;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,12 +22,17 @@ public class CartItem extends BaseEntity {
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Cart cart;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "CART_ITEM_SIDE_PRODUCTS",
+            joinColumns = @JoinColumn(name = "CART_ITEM_ID"),
+            inverseJoinColumns = @JoinColumn(name = "SIDE_PRODUCTS_ID"))
     private List<SideProduct> sideProducts;
 
     public int getQuantity() {

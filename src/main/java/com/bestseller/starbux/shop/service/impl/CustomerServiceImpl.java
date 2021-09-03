@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
@@ -29,6 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto createCustomer(CustomerDto customerDto) {
         Customer customer = customerMapper.customerDtoToCustomer(customerDto);
         Cart emptyCart = new Cart();
+        emptyCart.setAmount(BigDecimal.ZERO);
         Cart cart = cartRepository.save(emptyCart);
         customer.setCart(cart);
         return customerMapper.customerToCustomerDto(customerRepository.save(customer));
