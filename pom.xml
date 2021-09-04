@@ -11,9 +11,10 @@
   </parent>
   <groupId>com.bestseller</groupId>
   <artifactId>starbux</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>starbux</name>
   <description>Starbux project for BESTSELLER</description>
+  <packaging>jar</packaging>
   <properties>
     <java.version>11</java.version>
     <version.mapstruct>1.4.2.Final</version.mapstruct>
@@ -86,6 +87,23 @@
             </path>
           </annotationProcessorPaths>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <classifier>spring-boot</classifier>
+              <mainClass>
+                com.bestseller.starbux.StarbuxApplication
+              </mainClass>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
