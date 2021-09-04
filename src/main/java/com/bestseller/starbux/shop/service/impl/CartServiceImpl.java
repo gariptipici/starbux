@@ -8,12 +8,18 @@ import com.bestseller.starbux.common.model.AbstractProduct;
 import com.bestseller.starbux.common.model.Product;
 import com.bestseller.starbux.common.model.SideProduct;
 import com.bestseller.starbux.shop.dto.CartDto;
+import com.bestseller.starbux.shop.dto.OrderDto;
 import com.bestseller.starbux.shop.exception.CartNotfoundException;
 import com.bestseller.starbux.shop.mapper.CartMapper;
+import com.bestseller.starbux.shop.mapper.OrderMapper;
 import com.bestseller.starbux.shop.model.Cart;
 import com.bestseller.starbux.shop.model.CartItem;
+import com.bestseller.starbux.shop.model.Customer;
+import com.bestseller.starbux.shop.model.Order;
 import com.bestseller.starbux.shop.repository.CartItemRepository;
 import com.bestseller.starbux.shop.repository.CartRepository;
+import com.bestseller.starbux.shop.repository.CustomerRepository;
+import com.bestseller.starbux.shop.repository.OrderRepository;
 import com.bestseller.starbux.shop.service.CartService;
 import com.bestseller.starbux.shop.service.DiscountService;
 import java.math.BigDecimal;
@@ -32,20 +38,28 @@ import java.util.stream.StreamSupport;
 public class CartServiceImpl implements CartService {
 
   private final CartRepository cartRepository;
+  private final OrderRepository orderRepository;
   private final CartItemRepository cartItemRepository;
   private final ProductRepository productRepository;
   private final SideProductRepository sideProductRepository;
   private final DiscountService discountService;
+  private final CustomerRepository customerRepository;
   private final CartMapper cartMapper = CartMapper.INSTANCE;
+  private final OrderMapper orderMapper = OrderMapper.INSTANCE;
 
-  public CartServiceImpl(CartRepository cartRepository, CartItemRepository cartItemRepository,
+  public CartServiceImpl(CartRepository cartRepository,
+      OrderRepository orderRepository,
+      CartItemRepository cartItemRepository,
       ProductRepository productRepository, SideProductRepository sideProductRepository,
-      DiscountService discountService) {
+      DiscountService discountService,
+      CustomerRepository customerRepository) {
     this.cartRepository = cartRepository;
+    this.orderRepository = orderRepository;
     this.cartItemRepository = cartItemRepository;
     this.productRepository = productRepository;
     this.sideProductRepository = sideProductRepository;
     this.discountService = discountService;
+    this.customerRepository = customerRepository;
   }
 
   @Override
@@ -105,5 +119,23 @@ public class CartServiceImpl implements CartService {
     });
 
     return readCart(customerId, cartId);
+  }
+
+  @Override
+  @Transactional
+  @Modifying
+  public OrderDto checkoutCart(Long customerId, Long cartId) {
+    Cart cart = cartRepository.findById_AndCustomerId(cartId, customerId)
+        .orElseThrow(CartNotfoundException::new);
+    Customer customer = cart.getCustomer();
+    Order order = orderRepository.save(cartMapper.cartToOrder(cart));
+    Cart emptyCart = new Cart();
+    emptyCart.setAmount(BigDecimal.ZERO);
+    emptyCart.setCustomer(customer);
+    emptyCart = cartRepository.save(emptyCart);
+    emptyCart.setCartItems(new ArrayList<>());
+    cartRepository.delete(cart);
+
+    return orderMapper.orderToOrderDto(order);
   }
 }
