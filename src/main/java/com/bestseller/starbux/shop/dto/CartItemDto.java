@@ -4,13 +4,24 @@ import com.bestseller.starbux.common.dto.BaseDto;
 import com.bestseller.starbux.common.dto.ProductDto;
 import com.bestseller.starbux.common.dto.SideProductDto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.List;
 
+@ApiModel(description = "Class representing an item of the customer's cart in Starbux")
 public class CartItemDto extends BaseDto {
+
+    @ApiModelProperty(notes = "Quantity of the product in item.", example = "1", position = 2)
     private Integer quantity;
+
+    @ApiModelProperty(notes = "Price of the product + side product in item.", hidden = true, position = 3)
     private BigDecimal price;
+
+    @ApiModelProperty(notes = "Product in item.", position = 4)
     private ProductDto product;
+
+    @ApiModelProperty(notes = "Side products in item.", position = 5)
     private List<SideProductDto> sideProducts;
 
     public Integer getQuantity() {

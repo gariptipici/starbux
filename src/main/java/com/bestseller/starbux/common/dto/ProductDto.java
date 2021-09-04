@@ -1,4 +1,8 @@
 package com.bestseller.starbux.common.dto;
 
-public class ProductDto extends AbstractProductDto{
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(description = "Class representing a product that exists in Starbux inventory.")
+public class ProductDto extends AbstractProductDto {
+
 }

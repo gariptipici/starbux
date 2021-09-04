@@ -132,7 +132,9 @@ public class CartServiceImpl implements CartService {
     Cart cart = cartRepository.findById_AndCustomerId(cartId, customerId)
         .orElseThrow(CartNotfoundException::new);
     Customer customer = cart.getCustomer();
+    logger.debug("Creating new order from cart with cart id {}", cartId);
     Order order = orderRepository.save(cartMapper.cartToOrder(cart));
+    logger.debug("Order created from from cart with cart id {}, new order id is {}", cartId, order.getId());
     Cart emptyCart = new Cart();
     emptyCart.setAmount(BigDecimal.ZERO);
     emptyCart.setCustomer(customer);
