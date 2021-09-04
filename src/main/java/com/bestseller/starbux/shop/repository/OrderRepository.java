@@ -11,4 +11,5 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
   Optional<Order> findById_AndCustomerId(Long orderId, Long customerId);
 
   List<Order> findAllByCustomerId(Long customerId);
+
 }
