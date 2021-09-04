@@ -3,7 +3,7 @@ version: "3.8"
 services:
   petfish:
     container_name: starbux
-    image: starbux:0.0.1
+    image: gariptipici/starbux:0.0.1
     build:
       context: .
       dockerfile: Dockerfile
