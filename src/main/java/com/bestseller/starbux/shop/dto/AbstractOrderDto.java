@@ -7,10 +7,19 @@ import java.util.List;
 
 public class AbstractOrderDto extends BaseDto {
     private BigDecimal amount;
+    private BigDecimal discount;
     private List<CartItemDto> cartItems;
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
     }
 
     public void setAmount(BigDecimal amount) {

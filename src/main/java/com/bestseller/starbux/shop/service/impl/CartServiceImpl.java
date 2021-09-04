@@ -84,6 +84,9 @@ public class CartServiceImpl implements CartService {
       }).collect(Collectors.toList());
       cartItemRepository.deleteAll(existingCart.getCartItems());
       existingCart.setCartItems(newItems);
+      BigDecimal totalAmount = existingCart.getCartItems().stream().map(CartItem::getPrice)
+          .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+      existingCart.setAmount(totalAmount);
       BigDecimal discount = discountService.calculateDiscount(existingCart);
       existingCart.setDiscount(discount);
       return existingCart;
