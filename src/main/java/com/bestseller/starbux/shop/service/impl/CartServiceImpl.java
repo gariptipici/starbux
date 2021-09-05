@@ -120,6 +120,8 @@ public class CartServiceImpl implements CartService {
     cartRepository.findById_AndCustomerId(cartId, customerId).ifPresent(existing -> {
       cartItemRepository.deleteAll(existing.getCartItems());
       existing.setCartItems(new ArrayList<>());
+      existing.setDiscount(BigDecimal.ZERO);
+      existing.setAmount(BigDecimal.ZERO);
     });
     logger.debug("Emptying cart with id {} of customer with customer id {} is successful", cartId, customerId);
     return readCart(customerId, cartId);

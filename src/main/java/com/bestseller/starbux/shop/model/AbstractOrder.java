@@ -18,6 +18,7 @@ public abstract class AbstractOrder extends BaseEntity {
 
     @Column(name = "DISCOUNT")
     private BigDecimal discount;
+
     public BigDecimal getDiscount() {
         return discount;
     }
