@@ -1,7 +1,7 @@
 FROM maven:3.6.3-jdk-11-slim AS build
 WORKDIR usr/src/app
 COPY . ./
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 FROM openjdk:8-jdk-alpine
 ARG JAR_NAME="starbux-0.0.1"
