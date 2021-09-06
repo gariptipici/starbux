@@ -9,6 +9,10 @@
     <version>2.5.4</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
+  <properties>
+    <sonar.organization>gariptipici</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  </properties>
   <groupId>com.bestseller</groupId>
   <artifactId>starbux</artifactId>
   <version>0.0.1</version>
