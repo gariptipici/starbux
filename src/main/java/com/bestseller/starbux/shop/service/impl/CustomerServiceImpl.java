@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     logger.debug("Creating empty cart for new customer");
     Cart cart = cartRepository.save(emptyCart);
     logger.debug("Empty cart with id {} created for new customer.", cart.getId());
-
+    customer.setId(null);
     customer.setCart(cart);
     cart.setCustomer(customer);
 
