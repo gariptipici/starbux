@@ -1,10 +1,13 @@
 package com.bestseller.starbux.admin.controller;
 
+import com.bestseller.starbux.admin.exception.ProductNotFoundException;
+import com.bestseller.starbux.admin.exception.ProductNotModifiableException;
 import com.bestseller.starbux.admin.service.ProductService;
 import com.bestseller.starbux.common.dto.SideProductDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,6 +61,12 @@ public class SideProductController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteSideProduct(
       @ApiParam(value = "Id of the side product to be deleted. Cannot be empty.", example = "1") @PathVariable Long sideProductId) {
-    productService.deleteSideProduct(sideProductId);
+    try {
+      productService.deleteSideProduct(sideProductId);
+    } catch (EmptyResultDataAccessException empty) {
+      throw new ProductNotFoundException();
+    } catch (Exception sql) {
+      throw new ProductNotModifiableException();
+    }
   }
 }
