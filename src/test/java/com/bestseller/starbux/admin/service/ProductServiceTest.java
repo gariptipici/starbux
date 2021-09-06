@@ -18,16 +18,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ProductServiceTest {
+class ProductServiceTest {
 
-  ProductMapper productMapper = ProductMapper.INSTANCE;
+  final ProductMapper productMapper = ProductMapper.INSTANCE;
 
   @Mock
   ProductRepository productRepository;
@@ -56,7 +58,7 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void createProductTest(){
+  void createProductTest() {
     Mockito.when(productRepository.save(any())).thenReturn(product);
     ProductDto expected = productMapper.productToProductDto(product);
     ProductDto actual = productService.createProduct(new ProductDto());
@@ -65,7 +67,7 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void createSideProductTest(){
+  void createSideProductTest() {
     Mockito.when(sideProductRepository.save(any())).thenReturn(sideProduct);
     SideProductDto expected = productMapper.sideProductToSideProductDto(sideProduct);
     SideProductDto actual = productService.createSideProduct(new SideProductDto());
@@ -74,7 +76,7 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void readProductTest(){
+  void readProductTest() {
     Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
     ProductDto expected = productMapper.productToProductDto(product);
     ProductDto actual = productService.readProduct(1L);
@@ -83,13 +85,13 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void readProductTestNotFound(){
+  void readProductTestNotFound() {
     Mockito.when(productRepository.findById(anyLong())).thenThrow(ProductNotFoundException.class);
     Assertions.assertThrows(ProductNotFoundException.class, () -> productService.readProduct(1L));
   }
 
   @Test
-  public void readSideProductTest(){
+  void readSideProductTest() {
     Mockito.when(sideProductRepository.findById(anyLong())).thenReturn(Optional.of(sideProduct));
     SideProductDto expected = productMapper.sideProductToSideProductDto(sideProduct);
     SideProductDto actual = productService.readSideProduct(1L);
@@ -98,29 +100,34 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void readSideProductTestNotFound(){
-    Mockito.when(sideProductRepository.findById(anyLong())).thenThrow(ProductNotFoundException.class);
-    Assertions.assertThrows(ProductNotFoundException.class, () -> productService.readSideProduct(1L));
+  void readSideProductTestNotFound() {
+    Mockito.when(sideProductRepository.findById(anyLong()))
+        .thenThrow(ProductNotFoundException.class);
+    Assertions
+        .assertThrows(ProductNotFoundException.class, () -> productService.readSideProduct(1L));
   }
 
   @Test
-  public void readProductsTest(){
+  void readProductsTest() {
     Mockito.when(productRepository.findAll()).thenReturn(Collections.singletonList(product));
-    List<ProductDto> expected = Collections.singletonList(productMapper.productToProductDto(product));
+    List<ProductDto> expected = Collections
+        .singletonList(productMapper.productToProductDto(product));
     List<ProductDto> actual = productService.readProducts();
     Assertions.assertEquals(expected.get(0).getProductName(), actual.get(0).getProductName());
   }
 
   @Test
-  public void readSideProductsTest(){
-    Mockito.when(sideProductRepository.findAll()).thenReturn(Collections.singletonList(sideProduct));
-    List<SideProductDto> expected = Collections.singletonList(productMapper.sideProductToSideProductDto(sideProduct));
+  void readSideProductsTest() {
+    Mockito.when(sideProductRepository.findAll())
+        .thenReturn(Collections.singletonList(sideProduct));
+    List<SideProductDto> expected = Collections
+        .singletonList(productMapper.sideProductToSideProductDto(sideProduct));
     List<SideProductDto> actual = productService.readSideProducts();
     Assertions.assertEquals(expected.get(0).getProductName(), actual.get(0).getProductName());
   }
 
   @Test
-  public void updateProductTest(){
+  void updateProductTest() {
     Mockito.when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
     product.setProductName("newProductName");
     Mockito.when(productRepository.save(any())).thenReturn(product);
@@ -130,16 +137,17 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void updateProductTestNotFound(){
+  void updateProductTestNotFound() {
     Mockito.when(productRepository.findById(anyLong())).thenThrow(ProductNotFoundException.class);
     product.setProductName("newProductName");
     Mockito.when(productRepository.save(any())).thenReturn(product);
     ProductDto expected = productMapper.productToProductDto(product);
-    Assertions.assertThrows(ProductNotFoundException.class, () -> productService.updateProduct(1L, expected));
+    Assertions.assertThrows(ProductNotFoundException.class,
+        () -> productService.updateProduct(1L, expected));
   }
 
   @Test
-  public void updateSideProductTest(){
+  void updateSideProductTest() {
     Mockito.when(sideProductRepository.findById(anyLong())).thenReturn(Optional.of(sideProduct));
     sideProduct.setProductName("newSideProductName");
     Mockito.when(sideProductRepository.save(any())).thenReturn(sideProduct);
@@ -149,22 +157,24 @@ public class ProductServiceTest {
   }
 
   @Test
-  public void updateSideProductTestNotFound(){
-    Mockito.when(sideProductRepository.findById(anyLong())).thenThrow(ProductNotFoundException.class);
+  void updateSideProductTestNotFound() {
+    Mockito.when(sideProductRepository.findById(anyLong()))
+        .thenThrow(ProductNotFoundException.class);
     product.setProductName("newProductName");
     Mockito.when(sideProductRepository.save(any())).thenReturn(sideProduct);
     SideProductDto expected = productMapper.sideProductToSideProductDto(sideProduct);
-    Assertions.assertThrows(ProductNotFoundException.class, () -> productService.updateSideProduct(1L, expected));
+    Assertions.assertThrows(ProductNotFoundException.class,
+        () -> productService.updateSideProduct(1L, expected));
   }
 
   @Test
-  public void deleteProductTest(){
+  void deleteProductTest() {
     productService.deleteProduct(anyLong());
     verify(productRepository, times(1)).deleteById(any());
   }
 
   @Test
-  public void deleteSideProductTest(){
+  void deleteSideProductTest() {
     productService.deleteSideProduct(anyLong());
     verify(sideProductRepository, times(1)).deleteById(any());
   }

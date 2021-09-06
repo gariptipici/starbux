@@ -1,13 +1,14 @@
 package com.bestseller.starbux.shop.repository;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.util.Assert;
 
 @DataJpaTest
-public class OrderRepositoryTest {
+class OrderRepositoryTest {
 
   private static final Long TEST_DATA_CUSTOMER_ID = 3L;
   private static final Long TEST_DATA_ORDER_ID = 2L;
@@ -16,28 +17,27 @@ public class OrderRepositoryTest {
   OrderRepository orderRepository;
 
   @Test
-  public void findAllByCustomerIdTest() {
-    Assert.notEmpty(orderRepository.findAllByCustomerId(TEST_DATA_CUSTOMER_ID), "List is empty");
+  void findAllByCustomerIdTest() {
+    Assertions.assertFalse(orderRepository.findAllByCustomerId(TEST_DATA_CUSTOMER_ID).isEmpty());
   }
 
   @Test
-  public void findAllByCustomerIdTestNotFound() {
-    Assert.isTrue(orderRepository.findAllByCustomerId(1L).isEmpty(), "List not empty");
+  void findAllByCustomerIdTestNotFound() {
+    Assertions.assertTrue(orderRepository.findAllByCustomerId(1L).isEmpty());
   }
 
 
   @Test
-  public void findById_AndCustomerIdTest() {
-    Assert
-        .notNull(orderRepository.findById_AndCustomerId(TEST_DATA_ORDER_ID, TEST_DATA_CUSTOMER_ID),
-            "Object is null");
+  void findById_AndCustomerIdTest() {
+    Assertions
+        .assertNotNull(
+            orderRepository.findById_AndCustomerId(TEST_DATA_ORDER_ID, TEST_DATA_CUSTOMER_ID));
   }
 
   @Test
-  public void findById_AndCustomerIdTestNotFound() {
-    Assert
-        .isTrue(!orderRepository.findById_AndCustomerId(1L, TEST_DATA_CUSTOMER_ID).isPresent(),
-            "Object is null");
+  void findById_AndCustomerIdTestNotFound() {
+    Assertions
+        .assertFalse(orderRepository.findById_AndCustomerId(1L, TEST_DATA_CUSTOMER_ID).isPresent());
   }
 
 }

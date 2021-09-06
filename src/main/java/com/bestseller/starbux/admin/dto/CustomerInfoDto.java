@@ -1,7 +1,6 @@
 package com.bestseller.starbux.admin.dto;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public class CustomerInfoDto {
   private Long customerId;

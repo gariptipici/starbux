@@ -22,7 +22,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class OrderServiceTest {
+class OrderServiceTest {
 
   OrderService orderService;
   Order order;
@@ -64,21 +64,21 @@ public class OrderServiceTest {
   }
 
   @Test
-  public void readOrderTest() {
+  void readOrderTest() {
     Mockito.when(orderRepository.findById_AndCustomerId(1L, 1L)).thenReturn(Optional.of(order));
     OrderDto actual = orderService.readOrder(1L, 1L);
     Assertions.assertEquals(order.getAmount(), actual.getAmount());
   }
 
   @Test
-  public void readOrderNotFoundTest() {
+  void readOrderNotFoundTest() {
     Mockito.when(orderRepository.findById_AndCustomerId(1L, 1L))
         .thenThrow(OrderNotfoundException.class);
     Assertions.assertThrows(OrderNotfoundException.class, () -> orderService.readOrder(1L, 1L));
   }
 
   @Test
-  public void readOrdersTest() {
+  void readOrdersTest() {
     Mockito.when(orderRepository.findAllByCustomerId(1L))
         .thenReturn(Collections.singletonList(order));
 

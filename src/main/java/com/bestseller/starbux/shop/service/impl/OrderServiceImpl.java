@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements OrderService {
   private final OrderRepository orderRepository;
 
-  private final OrderMapper orderMapper = OrderMapper.INSTANCE;
+  private static final OrderMapper orderMapper = OrderMapper.INSTANCE;
 
   public OrderServiceImpl(OrderRepository orderRepository) {
     this.orderRepository = orderRepository;

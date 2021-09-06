@@ -20,7 +20,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class CustomerInfoReportServiceTest {
+class CustomerInfoReportServiceTest {
 
   CustomerInfoReportService customerInfoReportService;
 
@@ -56,15 +56,16 @@ public class CustomerInfoReportServiceTest {
   }
 
   @Test
-  public void getTotalAmountPerCustomerTest(){
+  void getTotalAmountPerCustomerTest() {
     List<CustomerInfoDto> result = customerInfoReportService.getTotalAmountPerCustomer();
-    Assertions.assertEquals(result.get(0).getCustomerId(), 1L);
-    Assertions.assertEquals(result.get(0).getOrderTotalAmount(), BigDecimal.TEN);
+    Assertions.assertEquals(1L, result.get(0).getCustomerId());
+    Assertions.assertEquals(BigDecimal.TEN, result.get(0).getOrderTotalAmount());
   }
+
   @Test
-  public void getMostUsedToppingPerProductTest(){
+  void getMostUsedToppingPerProductTest() {
     List<ProductInfoDto> result = customerInfoReportService.getMostUsedToppingPerProduct();
-    Assertions.assertEquals(result.get(0).getProductId(), 1L);
-    Assertions.assertEquals(result.get(0).getSideProductId(), 1L);
+    Assertions.assertEquals(1L, result.get(0).getProductId());
+    Assertions.assertEquals(1L, result.get(0).getSideProductId());
   }
 }

@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(ReportController.class)
-public class ReportControllerTest {
+ class ReportControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -24,14 +24,14 @@ public class ReportControllerTest {
   CustomerInfoReportService customerInfoReportService;
 
   @Test
-  public void getTotalAmountPerCustomerTest() throws Exception{
+   void getTotalAmountPerCustomerTest() throws Exception{
     Mockito.when(customerInfoReportService.getTotalAmountPerCustomer()).thenReturn(new ArrayList<>());
     mockMvc.perform(get("/admin/reports/orderCountByCustomer")).andDo(print())
         .andExpect(status().isOk());
   }
 
   @Test
-  public void getMostUsedToppingPerProductTest() throws Exception{
+   void getMostUsedToppingPerProductTest() throws Exception{
     Mockito.when(customerInfoReportService.getMostUsedToppingPerProduct()).thenReturn(new ArrayList<>());
     mockMvc.perform(get("/admin/reports/mostUsedToppingPerProduct")).andDo(print())
         .andExpect(status().isOk());

@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
-public class ProductControllerTest {
+class ProductControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -47,7 +47,7 @@ public class ProductControllerTest {
   }
 
   @Test
-  public void createProductTest() throws Exception {
+  void createProductTest() throws Exception {
     Mockito.when(productService.createProduct(any())).thenReturn(productDto);
 
     MvcResult result = mockMvc
@@ -60,7 +60,7 @@ public class ProductControllerTest {
   }
 
   @Test
-  public void readProductTest() throws Exception {
+  void readProductTest() throws Exception {
     Mockito.when(productService.readProduct(anyLong())).thenReturn(productDto);
 
     MvcResult result = mockMvc
@@ -72,21 +72,21 @@ public class ProductControllerTest {
   }
 
   @Test
-  public void readProductNotFoundTest() throws Exception {
+  void readProductNotFoundTest() throws Exception {
     Mockito.when(productService.readProduct(anyLong())).thenThrow(ProductNotFoundException.class);
 
     mockMvc.perform(get("/admin/products/1")).andDo(print()).andExpect(status().isNotFound());
   }
 
   @Test
-  public void readProductsTest() throws Exception {
+  void readProductsTest() throws Exception {
     Mockito.when(productService.readProduct(anyLong())).thenReturn(productDto);
 
     mockMvc.perform(get("/admin/products")).andDo(print()).andExpect(status().isOk());
   }
 
   @Test
-  public void updateProductTest() throws Exception {
+  void updateProductTest() throws Exception {
     Mockito.when(productService.updateProduct(anyLong(), any())).thenReturn(productDto);
 
     MvcResult result = mockMvc
@@ -99,7 +99,7 @@ public class ProductControllerTest {
   }
 
   @Test
-  public void updateProductNotFoundTest() throws Exception {
+  void updateProductNotFoundTest() throws Exception {
     Mockito.when(productService.updateProduct(anyLong(), any()))
         .thenThrow(ProductNotFoundException.class);
 
@@ -110,7 +110,7 @@ public class ProductControllerTest {
   }
 
   @Test
-  public void deleteProductTest() throws Exception {
+  void deleteProductTest() throws Exception {
 
     mockMvc.perform(delete("/admin/products/1")).andDo(print()).andExpect(status().isNoContent());
   }

@@ -1,7 +1,6 @@
 package com.bestseller.starbux.admin.service.impl;
 
 import com.bestseller.starbux.admin.exception.ProductNotFoundException;
-import com.bestseller.starbux.admin.exception.ProductNotModifiableException;
 import com.bestseller.starbux.admin.repository.ProductRepository;
 import com.bestseller.starbux.admin.repository.SideProductRepository;
 import com.bestseller.starbux.common.dto.ProductDto;
@@ -10,8 +9,7 @@ import com.bestseller.starbux.admin.service.ProductService;
 import com.bestseller.starbux.common.mapper.ProductMapper;
 import com.bestseller.starbux.common.model.Product;
 import com.bestseller.starbux.common.model.SideProduct;
-import java.sql.SQLException;
-import org.springframework.dao.EmptyResultDataAccessException;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
   private final ProductRepository productRepository;
   private final SideProductRepository sideProductRepository;
 
-  private final ProductMapper productMapper = ProductMapper.INSTANCE;
+  private static final ProductMapper productMapper = ProductMapper.INSTANCE;
 
   public ProductServiceImpl(ProductRepository productRepository,
       SideProductRepository sideProductRepository) {

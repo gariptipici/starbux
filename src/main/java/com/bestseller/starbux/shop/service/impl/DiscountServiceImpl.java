@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DiscountServiceImpl implements DiscountService {
 
-  Logger logger = LoggerFactory.getLogger(DiscountServiceImpl.class);
+  private final Logger logger = LoggerFactory.getLogger(DiscountServiceImpl.class);
 
   private static final BigDecimal PRICE_THRESHOLD = BigDecimal.valueOf(12);
   private static final Integer QUANTITY_THRESHOLD = 3;

@@ -1,12 +1,13 @@
 package com.bestseller.starbux.shop.repository;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.util.Assert;
 
 @DataJpaTest
-public class CartRepositoryTest {
+class CartRepositoryTest {
 
   private static final Long TEST_DATA_CUSTOMER_ID = 3L;
   private static final Long TEST_DATA_CART_ID = 5L;
@@ -15,17 +16,16 @@ public class CartRepositoryTest {
   CartRepository cartRepository;
 
   @Test
-  public void findById_AndCustomerIdTest() {
-    Assert
-        .isTrue(cartRepository.findById_AndCustomerId(TEST_DATA_CART_ID, TEST_DATA_CUSTOMER_ID).isPresent(),
-            "Object is null");
+  void findById_AndCustomerIdTest() {
+    Assertions
+        .assertTrue(cartRepository.findById_AndCustomerId(TEST_DATA_CART_ID, TEST_DATA_CUSTOMER_ID)
+            .isPresent());
   }
 
   @Test
-  public void findById_AndCustomerIdTesjNotFound() {
-    Assert
-        .isTrue(!cartRepository.findById_AndCustomerId(TEST_DATA_CART_ID, 1L).isPresent(),
-            "Object is null");
+  void findById_AndCustomerIdTesjNotFound() {
+    Assertions
+        .assertFalse(cartRepository.findById_AndCustomerId(TEST_DATA_CART_ID, 1L).isPresent());
   }
 
 }

@@ -8,15 +8,12 @@ import com.bestseller.starbux.common.model.Product;
 import com.bestseller.starbux.common.model.SideProduct;
 import com.bestseller.starbux.shop.model.CartItem;
 import com.bestseller.starbux.shop.repository.CartItemRepository;
-import com.bestseller.starbux.shop.repository.OrderRepository;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import org.springframework.stereotype.Service;
 

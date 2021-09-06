@@ -25,7 +25,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class CustomerServiceTest {
+class CustomerServiceTest {
 
   CustomerService customerService;
 
@@ -39,7 +39,7 @@ public class CustomerServiceTest {
   CustomerRepository customerRepository;
   @Mock
   CartRepository cartRepository;
-  CustomerMapper customerMapper = CustomerMapper.INSTANCE;
+  final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
 
   @BeforeEach
   public void init() {
@@ -80,7 +80,7 @@ public class CustomerServiceTest {
   }
 
   @Test
-  public void createCustomerTest(){
+  void createCustomerTest() {
     Cart emptyCart = new Cart();
     emptyCart.setAmount(BigDecimal.ZERO);
     Mockito.when(cartRepository.save(any())).thenReturn(cart);
@@ -93,16 +93,17 @@ public class CustomerServiceTest {
   }
 
   @Test
-  public void readCustomerTest(){
+  void readCustomerTest() {
     Mockito.when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
     CustomerDto actual = customerService.readCustomer(1L);
     Assertions.assertEquals(customer.getId(), actual.getId());
   }
 
   @Test
-  public void readCustomerNotFoundTest(){
+  void readCustomerNotFoundTest() {
     Mockito.when(customerRepository.findById(1L)).thenThrow(CustomerNotfoundException.class);
-    Assertions.assertThrows(CustomerNotfoundException.class, () -> customerService.readCustomer(1L));
+    Assertions
+        .assertThrows(CustomerNotfoundException.class, () -> customerService.readCustomer(1L));
   }
 
 }

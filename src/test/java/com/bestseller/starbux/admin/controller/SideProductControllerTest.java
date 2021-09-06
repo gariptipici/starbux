@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 @WebMvcTest(SideProductController.class)
-public class SideProductControllerTest {
+class SideProductControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -46,7 +46,7 @@ public class SideProductControllerTest {
   }
 
   @Test
-  public void createProductTest() throws Exception {
+  void createProductTest() throws Exception {
     Mockito.when(productService.createSideProduct(any())).thenReturn(productDto);
 
     MvcResult result = mockMvc
@@ -59,7 +59,7 @@ public class SideProductControllerTest {
   }
 
   @Test
-  public void readProductTest() throws Exception {
+  void readProductTest() throws Exception {
     Mockito.when(productService.readSideProduct(anyLong())).thenReturn(productDto);
 
     MvcResult result = mockMvc
@@ -71,21 +71,22 @@ public class SideProductControllerTest {
   }
 
   @Test
-  public void readProductNotFoundTest() throws Exception {
-    Mockito.when(productService.readSideProduct(anyLong())).thenThrow(ProductNotFoundException.class);
+  void readProductNotFoundTest() throws Exception {
+    Mockito.when(productService.readSideProduct(anyLong()))
+        .thenThrow(ProductNotFoundException.class);
 
     mockMvc.perform(get("/admin/sideproducts/1")).andDo(print()).andExpect(status().isNotFound());
   }
 
   @Test
-  public void readProductsTest() throws Exception {
+  void readProductsTest() throws Exception {
     Mockito.when(productService.readSideProduct(anyLong())).thenReturn(productDto);
 
     mockMvc.perform(get("/admin/sideproducts")).andDo(print()).andExpect(status().isOk());
   }
 
   @Test
-  public void updateProductTest() throws Exception {
+  void updateProductTest() throws Exception {
     Mockito.when(productService.updateSideProduct(anyLong(), any())).thenReturn(productDto);
 
     MvcResult result = mockMvc
@@ -98,7 +99,7 @@ public class SideProductControllerTest {
   }
 
   @Test
-  public void updateProductNotFoundTest() throws Exception {
+  void updateProductNotFoundTest() throws Exception {
     Mockito.when(productService.updateSideProduct(anyLong(), any()))
         .thenThrow(ProductNotFoundException.class);
 
@@ -109,9 +110,10 @@ public class SideProductControllerTest {
   }
 
   @Test
-  public void deleteProductTest() throws Exception {
+  void deleteProductTest() throws Exception {
 
-    mockMvc.perform(delete("/admin/sideproducts/1")).andDo(print()).andExpect(status().isNoContent());
+    mockMvc.perform(delete("/admin/sideproducts/1")).andDo(print())
+        .andExpect(status().isNoContent());
   }
 
 

@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CartController.class)
-public class CartControllerTest {
+class CartControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -51,7 +51,7 @@ public class CartControllerTest {
   }
 
   @Test
-  public void readCartTest() throws Exception {
+  void readCartTest() throws Exception {
     Mockito.when(cartService.readCart(1L, 1L)).thenReturn(cartDto);
     Mockito.when(cartService.readCart(2L, 1L)).thenThrow(CartNotfoundException.class);
 
@@ -65,7 +65,7 @@ public class CartControllerTest {
   }
 
   @Test
-  public void updateCartTest() throws Exception {
+  void updateCartTest() throws Exception {
     newCartDto.setAmount(BigDecimal.ONE);
     Mockito.when(cartService.updateCart(anyLong(), anyLong(), any())).thenReturn(newCartDto);
 
@@ -78,7 +78,7 @@ public class CartControllerTest {
   }
 
   @Test
-  public void updateCartCartNotFoundTest() throws Exception {
+ void updateCartCartNotFoundTest() throws Exception {
     newCartDto.setAmount(BigDecimal.ONE);
     Mockito.when(cartService.updateCart(anyLong(), anyLong(), any())).thenThrow(CartNotfoundException.class);
     mockMvc.perform(
@@ -88,7 +88,7 @@ public class CartControllerTest {
   }
 
   @Test
-  public void updateCartProductNotFoundTest() throws Exception {
+  void updateCartProductNotFoundTest() throws Exception {
     Mockito.when(cartService.updateCart(anyLong(), anyLong(), any()))
         .thenThrow(ProductNotFoundException.class);
 
@@ -99,7 +99,7 @@ public class CartControllerTest {
   }
 
   @Test
-  public void createOrderTest() throws Exception{
+  void createOrderTest() throws Exception{
     Mockito.when(cartService.checkoutCart(1L, 1L)).thenReturn(orderDto);
     MvcResult result = mockMvc.perform(
         post("/shop/customers/1/carts/1/checkout").contentType(MediaType.APPLICATION_JSON)
@@ -111,7 +111,7 @@ public class CartControllerTest {
   }
 
   @Test
-  public void deleteOrderTest() throws Exception{
+  void deleteOrderTest() throws Exception{
 
     Mockito.when(cartService.emptyCart(1L, 1L)).thenReturn(cartDto);
 

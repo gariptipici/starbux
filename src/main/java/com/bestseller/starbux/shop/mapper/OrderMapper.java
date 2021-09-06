@@ -10,8 +10,9 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public abstract class OrderMapper {
 
-  public static OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
+  public static final OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
   public abstract OrderDto orderToOrderDto(Order order);
+
   public abstract List<OrderDto> orderListToOrderDtoList(List<Order> orderList);
 }

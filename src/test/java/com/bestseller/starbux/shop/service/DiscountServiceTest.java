@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class DiscountServiceTest {
+class DiscountServiceTest {
 
   DiscountService discountService;
 
@@ -71,14 +71,14 @@ public class DiscountServiceTest {
   }
 
   @Test
-  public void calculateDiscountNotEligibleAnyDiscountTest() {
+  void calculateDiscountNotEligibleAnyDiscountTest() {
     cart.setCartItems(cartItems);
     BigDecimal actualDiscount = discountService.calculateDiscount(cart);
     Assertions.assertEquals(BigDecimal.ZERO, actualDiscount);
   }
 
   @Test
-  public void calculateDiscountOnlyEligibleToPriceDiscountTest() {
+  void calculateDiscountOnlyEligibleToPriceDiscountTest() {
     cartItems.add(cartItem2);
     cart.setCartItems(cartItems);
     BigDecimal actualDiscount = discountService.calculateDiscount(cart);
@@ -86,7 +86,7 @@ public class DiscountServiceTest {
   }
 
   @Test
-  public void calculateDiscountOnlyEligibleToQuantityDiscountTest() {
+  void calculateDiscountOnlyEligibleToQuantityDiscountTest() {
     cartItems.add(cartItem3);
     cart.setCartItems(cartItems);
     BigDecimal actualDiscount = discountService.calculateDiscount(cart);
@@ -94,7 +94,7 @@ public class DiscountServiceTest {
   }
 
   @Test
-  public void calculateDiscountEligibleForBothDiscountTest() {
+  void calculateDiscountEligibleForBothDiscountTest() {
     cartItems.add(cartItem3);
     cartItems.add(cartItem2);
     cart.setCartItems(cartItems);

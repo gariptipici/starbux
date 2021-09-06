@@ -18,11 +18,11 @@ import java.math.BigDecimal;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-  Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+  private final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
   private final CustomerRepository customerRepository;
   private final CartRepository cartRepository;
-  private final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
+  private static final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
 
   public CustomerServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository) {
     this.customerRepository = customerRepository;

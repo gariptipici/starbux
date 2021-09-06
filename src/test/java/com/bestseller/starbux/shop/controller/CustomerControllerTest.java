@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 @WebMvcTest(CustomerController.class)
-public class CustomerControllerTest {
+ class CustomerControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -40,7 +40,7 @@ public class CustomerControllerTest {
   }
 
   @Test
-  public void createCustomerTest() throws Exception {
+   void createCustomerTest() throws Exception {
     Mockito.when(customerService.createCustomer(any())).thenReturn(customerDto);
     MvcResult result = mockMvc
         .perform(post("/shop/customers").contentType(MediaType.APPLICATION_JSON)
@@ -52,7 +52,7 @@ public class CustomerControllerTest {
   }
 
   @Test
-  public void readCustomerTest() throws Exception {
+   void readCustomerTest() throws Exception {
     Mockito.when(customerService.readCustomer(anyLong())).thenReturn(customerDto);
     MvcResult result = mockMvc.perform(get("/shop/customers/1")).andDo(print())
         .andExpect(status().isOk()).andReturn();
@@ -62,7 +62,7 @@ public class CustomerControllerTest {
   }
 
   @Test
-  public void readCustomerNotFoundTest() throws Exception {
+   void readCustomerNotFoundTest() throws Exception {
     Mockito.when(customerService.readCustomer(anyLong()))
         .thenThrow(CustomerNotfoundException.class);
     MvcResult result = mockMvc.perform(get("/shop/customers/1")).andDo(print())

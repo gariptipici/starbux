@@ -37,7 +37,7 @@ import java.util.stream.StreamSupport;
 @Service
 public class CartServiceImpl implements CartService {
 
-  Logger logger = LoggerFactory.getLogger(CartServiceImpl.class);
+  private final Logger logger = LoggerFactory.getLogger(CartServiceImpl.class);
 
   private final CartRepository cartRepository;
   private final OrderRepository orderRepository;
@@ -45,8 +45,8 @@ public class CartServiceImpl implements CartService {
   private final ProductRepository productRepository;
   private final SideProductRepository sideProductRepository;
   private final DiscountService discountService;
-  private final CartMapper cartMapper = CartMapper.INSTANCE;
-  private final OrderMapper orderMapper = OrderMapper.INSTANCE;
+  private static final CartMapper cartMapper = CartMapper.INSTANCE;
+  private static final OrderMapper orderMapper = OrderMapper.INSTANCE;
 
   public CartServiceImpl(CartRepository cartRepository,
       OrderRepository orderRepository,

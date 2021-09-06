@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 @WebMvcTest(OrderController.class)
-public class OrderControllerTest {
+class OrderControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -39,7 +39,7 @@ public class OrderControllerTest {
   }
 
   @Test
-  public void readOrderTest() throws Exception {
+  void readOrderTest() throws Exception {
     Mockito.when(orderService.readOrder(anyLong(), anyLong())).thenReturn(orderDto);
     MvcResult result = mockMvc.perform(get("/shop/customers/1/orders/1")).andDo(print())
         .andExpect(status().isOk()).andReturn();
@@ -49,7 +49,7 @@ public class OrderControllerTest {
   }
 
   @Test
-  public void readOrderNotFoundTest() throws Exception {
+  void readOrderNotFoundTest() throws Exception {
     Mockito.when(orderService.readOrder(anyLong(), anyLong()))
         .thenThrow(OrderNotfoundException.class);
     mockMvc.perform(get("/shop/customers/1/orders/1")).andDo(print())
@@ -58,7 +58,7 @@ public class OrderControllerTest {
   }
 
   @Test
-  public void readOrdersTest() throws Exception {
+  void readOrdersTest() throws Exception {
     Mockito.when(orderService.readOrders(anyLong()))
         .thenReturn(Collections.singletonList(orderDto));
     mockMvc.perform(get("/shop/customers/1/orders")).andDo(print())

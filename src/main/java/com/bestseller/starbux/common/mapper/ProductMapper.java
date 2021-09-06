@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public abstract class ProductMapper {
-    public static ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+    public static final ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
     public abstract Product productDtoToProduct(ProductDto productDto);
     public abstract SideProduct sideProductDtoToSideProduct(SideProductDto sideProductDto);

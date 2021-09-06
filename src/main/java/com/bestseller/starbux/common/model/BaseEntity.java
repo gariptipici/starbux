@@ -18,6 +18,6 @@ public abstract class BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public BaseEntity() {
+    protected BaseEntity() {
     }
 }

@@ -33,7 +33,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class CartServiceTest {
+ class CartServiceTest {
 
   @Mock
   CartRepository cartRepository;
@@ -50,8 +50,8 @@ public class CartServiceTest {
 
   CartService cartService;
 
-  CartMapper cartMapper = CartMapper.INSTANCE;
-  OrderMapper orderMapper = OrderMapper.INSTANCE;
+  final CartMapper cartMapper = CartMapper.INSTANCE;
+  final OrderMapper orderMapper = OrderMapper.INSTANCE;
 
   CartItem cartItem;
   Cart cart;
@@ -95,7 +95,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void readCartTest() {
+   void readCartTest() {
     Mockito.when(cartRepository.findById_AndCustomerId(anyLong(), anyLong()))
         .thenReturn(Optional.of(cart));
 
@@ -106,7 +106,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void readCartTestNotFound() {
+   void readCartTestNotFound() {
     Mockito.when(cartRepository.findById_AndCustomerId(anyLong(), anyLong()))
         .thenThrow(CartNotfoundException.class);
 
@@ -114,7 +114,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void updateCartTest() {
+   void updateCartTest() {
     Mockito.when(cartRepository.findById_AndCustomerId(1L, 1L))
         .thenReturn(Optional.of(cart));
     ProductDto newProductDto = new ProductDto();
@@ -143,7 +143,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void updateCartTestProductNotFound() {
+   void updateCartTestProductNotFound() {
     Mockito.when(cartRepository.findById_AndCustomerId(1L, 1L))
         .thenReturn(Optional.of(cart));
     ProductDto newProductDto = new ProductDto();
@@ -171,7 +171,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void updateCartTestCartNotFound() {
+   void updateCartTestCartNotFound() {
     Mockito.when(cartRepository.findById_AndCustomerId(1L, 1L))
         .thenThrow(CartNotfoundException.class);
     ProductDto newProductDto = new ProductDto();
@@ -199,7 +199,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void emptyCartTest() {
+   void emptyCartTest() {
     cart.setCartItems(Collections.singletonList(cartItem));
     Mockito.when(cartRepository.findById_AndCustomerId(1L, 1L))
         .thenReturn(Optional.of(cart));
@@ -209,7 +209,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void emptyCartTestNotFound() {
+   void emptyCartTestNotFound() {
     cart.setCartItems(Collections.singletonList(cartItem));
     Mockito.when(cartRepository.findById_AndCustomerId(1L, 1L))
         .thenThrow(CartNotfoundException.class);
@@ -217,7 +217,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void checkoutCartTest() {
+   void checkoutCartTest() {
     Mockito.when(cartRepository.findById_AndCustomerId(1L, 1L))
         .thenReturn(Optional.of(cart));
     OrderDto expected = orderMapper.orderToOrderDto(cartMapper.cartToOrder(cart));
@@ -230,7 +230,7 @@ public class CartServiceTest {
   }
 
   @Test
-  public void checkoutCartNotFoundTest() {
+   void checkoutCartNotFoundTest() {
     Mockito.when(cartRepository.findById_AndCustomerId(1L, 1L))
         .thenThrow(CartNotfoundException.class);
     OrderDto expected = orderMapper.orderToOrderDto(cartMapper.cartToOrder(cart));

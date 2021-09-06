@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public abstract class CartMapper {
-    public static CartMapper INSTANCE = Mappers.getMapper(CartMapper.class);
+    public static final CartMapper INSTANCE = Mappers.getMapper(CartMapper.class);
 
     public abstract Order cartToOrder(Cart car);
     public abstract Cart cartDtoToCart(CartDto cartDto);

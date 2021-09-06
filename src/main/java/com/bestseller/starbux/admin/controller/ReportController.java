@@ -3,7 +3,6 @@ package com.bestseller.starbux.admin.controller;
 import com.bestseller.starbux.admin.dto.CustomerInfoDto;
 import com.bestseller.starbux.admin.dto.ProductInfoDto;
 import com.bestseller.starbux.admin.service.CustomerInfoReportService;
-import com.bestseller.starbux.common.dto.ProductDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
