@@ -39,68 +39,9 @@ public class ProductControllerIntegrationTests
         .getForObject("http://localhost:" + port + "/admin/sideproducts", List.class).size());
   }
 
-  @Test
-  @DirtiesContext
-  public void createTest() {
-    ProductDto dto = new ProductDto();
-    dto.setPrice(BigDecimal.TEN);
-    dto.setProductName("testProductName");
-    ProductDto result = this.restTemplate
-        .postForObject("http://localhost:" + port + "/admin/products", dto, ProductDto.class);
 
-    assertEquals(dto.getProductName(), result.getProductName());
 
-    SideProductDto sideDto = new SideProductDto();
-    sideDto.setPrice(BigDecimal.TEN);
-    sideDto.setProductName("testSideName");
-    SideProductDto sideResult = this.restTemplate
-        .postForObject("http://localhost:" + port + "/admin/sideproducts", sideDto, SideProductDto.class);
 
-    assertEquals(sideDto.getProductName(), sideResult.getProductName());
-  }
-  
-
-  @Test
-  @DirtiesContext
-  public void deleteTest() {
-
-    ProductDto dto = new ProductDto();
-    dto.setPrice(BigDecimal.TEN);
-    dto.setProductName("testProductName");
-    ProductDto resultOfPost = this.restTemplate
-        .postForObject("http://localhost:" + port + "/admin/products", dto, ProductDto.class);
-
-    ProductDto result = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/products/" + resultOfPost.getId(), ProductDto.class);
-
-    assertEquals(dto.getProductName(), result.getProductName());
-
-    this.restTemplate.delete("http://localhost:" + port + "/admin/products/" + result.getId());
-
-    ProductDto afterDeleteProduct = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/products/" + result.getId(), ProductDto.class);
-
-    assertNull(afterDeleteProduct.getId());
-
-    SideProductDto sideDto = new SideProductDto();
-    sideDto.setPrice(BigDecimal.TEN);
-    sideDto.setProductName("testSideProductName");
-    SideProductDto resultSideOfPost = this.restTemplate
-        .postForObject("http://localhost:" + port + "/admin/sideproducts", sideDto, SideProductDto.class);
-
-    SideProductDto sideResult = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/sideproducts/" + resultOfPost.getId(), SideProductDto.class);
-
-    assertEquals(sideDto.getProductName(), sideResult.getProductName());
-
-    this.restTemplate.delete("http://localhost:" + port + "/admin/sideproducts/" + sideResult.getId());
-
-    SideProductDto afterDeleteSideProduct = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/sideproducts/" + sideResult.getId(), SideProductDto.class);
-
-    assertNull(afterDeleteSideProduct.getId());
-
-  }
 
 
 }
