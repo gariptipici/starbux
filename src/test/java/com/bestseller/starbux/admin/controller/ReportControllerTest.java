@@ -30,4 +30,11 @@ public class ReportControllerTest {
         .andExpect(status().isOk());
   }
 
+  @Test
+  public void getMostUsedToppingPerProductTest() throws Exception{
+    Mockito.when(customerInfoReportService.getMostUsedToppingPerProduct()).thenReturn(new ArrayList<>());
+    mockMvc.perform(get("/admin/reports/mostUsedToppingPerProduct")).andDo(print())
+        .andExpect(status().isOk());
+  }
+
 }

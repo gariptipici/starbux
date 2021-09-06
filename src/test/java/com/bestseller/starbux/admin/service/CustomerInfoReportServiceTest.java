@@ -1,8 +1,12 @@
 package com.bestseller.starbux.admin.service;
 
 import com.bestseller.starbux.admin.dto.CustomerInfoDto;
+import com.bestseller.starbux.admin.dto.ProductInfoDto;
 import com.bestseller.starbux.admin.repository.CustomerInfoReportRepository;
 import com.bestseller.starbux.admin.service.impl.CustomerInfoReportServiceImpl;
+import com.bestseller.starbux.common.model.Product;
+import com.bestseller.starbux.common.model.SideProduct;
+import com.bestseller.starbux.shop.model.CartItem;
 import com.bestseller.starbux.shop.repository.CartItemRepository;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -19,19 +23,36 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class CustomerInfoReportServiceTest {
 
   CustomerInfoReportService customerInfoReportService;
-  CartItemRepository cartItemRepository;
 
   List<Object[]> reportResult;
 
+  CartItem cartItem;
+  SideProduct sideProduct;
+  Product product;
+
   @Mock
   CustomerInfoReportRepository customerInfoReportRepository;
+
+  @Mock
+  CartItemRepository cartItemRepository;
 
   @BeforeEach
   public void init() {
     customerInfoReportService = new CustomerInfoReportServiceImpl(customerInfoReportRepository,
         cartItemRepository);
+    cartItem = new CartItem();
+    product = new Product();
+    product.setId(1L);
+    cartItem.setProduct(product);
+
+    sideProduct = new SideProduct();
+    sideProduct.setId(1L);
+
+    cartItem.setSideProducts(Collections.singletonList(sideProduct));
     reportResult = Collections.singletonList(new Object[]{BigInteger.ONE, BigDecimal.TEN});
     Mockito.when(customerInfoReportRepository.getTotalAmountPerCustomer()).thenReturn(reportResult);
+
+    Mockito.when(cartItemRepository.findAll()).thenReturn(Collections.singletonList(cartItem));
   }
 
   @Test
@@ -39,5 +60,11 @@ public class CustomerInfoReportServiceTest {
     List<CustomerInfoDto> result = customerInfoReportService.getTotalAmountPerCustomer();
     Assertions.assertEquals(result.get(0).getCustomerId(), 1L);
     Assertions.assertEquals(result.get(0).getOrderTotalAmount(), BigDecimal.TEN);
+  }
+  @Test
+  public void getMostUsedToppingPerProductTest(){
+    List<ProductInfoDto> result = customerInfoReportService.getMostUsedToppingPerProduct();
+    Assertions.assertEquals(result.get(0).getProductId(), 1L);
+    Assertions.assertEquals(result.get(0).getSideProductId(), 1L);
   }
 }
