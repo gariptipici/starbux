@@ -58,45 +58,7 @@ public class ProductControllerIntegrationTests
 
     assertEquals(sideDto.getProductName(), sideResult.getProductName());
   }
-
-  @Test
-  public void readTest() {
-
-    ProductDto result = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/products/1", ProductDto.class);
-
-    assertEquals("Black Coffee", result.getProductName());
-
-    SideProductDto sideResult = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/sideproducts/1", SideProductDto.class);
-    assertEquals("Milk", sideResult.getProductName());
-  }
-
-  @Test
-  @DirtiesContext
-  public void updateTest() {
-    ProductDto dto = new ProductDto();
-    dto.setPrice(BigDecimal.TEN);
-    dto.setProductName("updatedProductName");
-
-    this.restTemplate.put("http://localhost:" + port + "/admin/products/1", dto);
-
-    ProductDto result = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/products/1", ProductDto.class);
-
-    assertEquals(dto.getProductName(), result.getProductName());
-
-    SideProductDto sideDto = new SideProductDto();
-    sideDto.setPrice(BigDecimal.TEN);
-    sideDto.setProductName("updatedSideProductName");
-
-    this.restTemplate.put("http://localhost:" + port + "/admin/sideproducts/1", sideDto);
-
-    SideProductDto sideResult = this.restTemplate
-        .getForObject("http://localhost:" + port + "/admin/sideproducts/1", SideProductDto.class);
-
-    assertEquals(sideDto.getProductName(), sideResult.getProductName());
-  }
+  
 
   @Test
   @DirtiesContext
