@@ -12,6 +12,8 @@
   <properties>
     <sonar.organization>gariptipici</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <java.version>11</java.version>
+    <version.mapstruct>1.4.2.Final</version.mapstruct>
   </properties>
   <groupId>com.bestseller</groupId>
   <artifactId>starbux</artifactId>
@@ -19,10 +21,6 @@
   <name>starbux</name>
   <description>Starbux project for BESTSELLER</description>
   <packaging>jar</packaging>
-  <properties>
-    <java.version>11</java.version>
-    <version.mapstruct>1.4.2.Final</version.mapstruct>
-  </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
