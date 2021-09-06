@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  petfish:
+  starbux:
     container_name: starbux
     image: gariptipici/starbux:0.0.1
     build:
