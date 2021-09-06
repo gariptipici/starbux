@@ -1,7 +1,6 @@
 package com.bestseller.starbux.shop.model;
 
 import com.bestseller.starbux.common.model.BaseEntity;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

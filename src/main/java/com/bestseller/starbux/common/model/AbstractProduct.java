@@ -1,11 +1,7 @@
 package com.bestseller.starbux.common.model;
 
-import com.bestseller.starbux.shop.model.CartItem;
-import lombok.Data;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 

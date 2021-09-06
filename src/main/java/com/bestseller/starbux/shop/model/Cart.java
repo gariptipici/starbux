@@ -1,6 +1,5 @@
 package com.bestseller.starbux.shop.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 

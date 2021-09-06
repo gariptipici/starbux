@@ -3,15 +3,12 @@ package com.bestseller.starbux.shop.model;
 import com.bestseller.starbux.common.model.BaseEntity;
 import com.bestseller.starbux.common.model.Product;
 import com.bestseller.starbux.common.model.SideProduct;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "CART_ITEM")
 public class CartItem extends BaseEntity {

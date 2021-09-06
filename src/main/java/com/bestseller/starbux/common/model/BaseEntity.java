@@ -1,15 +1,10 @@
 package com.bestseller.starbux.common.model;
 
-import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.domain.Auditable;
-
+import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Date;
 
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +18,6 @@ public abstract class BaseEntity {
         this.id = id;
     }
 
+    public BaseEntity() {
+    }
 }
