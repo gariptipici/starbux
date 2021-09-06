@@ -3,7 +3,7 @@ package com.bestseller.starbux.admin.service;
 import com.bestseller.starbux.admin.dto.CustomerInfoDto;
 import com.bestseller.starbux.admin.repository.CustomerInfoReportRepository;
 import com.bestseller.starbux.admin.service.impl.CustomerInfoReportServiceImpl;
-import com.bestseller.starbux.admin.service.impl.ProductServiceImpl;
+import com.bestseller.starbux.shop.repository.CartItemRepository;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collections;
@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class CustomerInfoReportServiceTest {
 
   CustomerInfoReportService customerInfoReportService;
+  CartItemRepository cartItemRepository;
 
   List<Object[]> reportResult;
 
@@ -27,7 +28,8 @@ public class CustomerInfoReportServiceTest {
 
   @BeforeEach
   public void init() {
-    customerInfoReportService = new CustomerInfoReportServiceImpl(customerInfoReportRepository);
+    customerInfoReportService = new CustomerInfoReportServiceImpl(customerInfoReportRepository,
+        cartItemRepository);
     reportResult = Collections.singletonList(new Object[]{BigInteger.ONE, BigDecimal.TEN});
     Mockito.when(customerInfoReportRepository.getTotalAmountPerCustomer()).thenReturn(reportResult);
   }

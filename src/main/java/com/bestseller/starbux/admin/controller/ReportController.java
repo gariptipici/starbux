@@ -1,6 +1,7 @@
 package com.bestseller.starbux.admin.controller;
 
 import com.bestseller.starbux.admin.dto.CustomerInfoDto;
+import com.bestseller.starbux.admin.dto.ProductInfoDto;
 import com.bestseller.starbux.admin.service.CustomerInfoReportService;
 import com.bestseller.starbux.common.dto.ProductDto;
 import io.swagger.annotations.Api;
@@ -29,6 +30,14 @@ public class ReportController {
   public List<CustomerInfoDto> getTotalAmountPerCustomer(){
 
     return customerInfoReportService.getTotalAmountPerCustomer();
+  }
+
+  @GetMapping("/mostUsedToppingPerProduct")
+  @ApiOperation("Returns the information of mostUsedToppingPerProduct.")
+  @ResponseStatus(HttpStatus.OK)
+  public List<ProductInfoDto> getMostUsedToppingPerProduct(){
+
+    return customerInfoReportService.getMostUsedToppingPerProduct();
   }
 
 
