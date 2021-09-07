@@ -50,6 +50,7 @@ class ProductServiceTest {
     product.setId(1L);
     product.setProductName("testProductName");
     product.setPrice(BigDecimal.TEN);
+    product.setCartItem(null);
 
     sideProduct = new SideProduct();
     sideProduct.setId(1L);
