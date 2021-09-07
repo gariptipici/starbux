@@ -76,6 +76,7 @@ class CustomerServiceTest {
     cart.setDiscount(BigDecimal.ONE);
 
     customer.setCart(cart);
+    customer.setOrders(null);
     cart.setCustomer(customer);
   }
 

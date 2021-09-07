@@ -56,6 +56,7 @@ class ProductServiceTest {
     sideProduct.setId(1L);
     sideProduct.setProductName("testSideProductName");
     sideProduct.setPrice(BigDecimal.ONE);
+    sideProduct.setCartItem(null);
   }
 
   @Test
